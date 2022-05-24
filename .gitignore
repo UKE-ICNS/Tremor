@@ -1,0 +1,14 @@
+__pycache__/
+Destexhe_Static_AMPA_Synapse.c
+Destexhe_Static_AMPA_Synapse.o
+Destexhe_Static_GABAA_Synapse.c
+Destexhe_Static_GABAA_Synapse.o
+mod_func.c
+mod_func.o
+myions.c
+myions.o
+nrnmech.dll
+pGPeA.c
+pGPeA.o
+pSTN.c
+pSTN.o
