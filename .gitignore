@@ -12,3 +12,17 @@ pGPeA.c
 pGPeA.o
 pSTN.c
 pSTN.o
+tc_CaConc.c
+tc_CaConc.o
+tc_CaT.c
+tc_CaT.o
+tc_fastK.c
+tc_fastK.o
+tc_fastNa.c
+tc_fastNa.o
+tc_h.c
+tc_h.o
+tc_pas2.c
+tc_pas2.o
+tc_slowK.c
+tc_slowK.o

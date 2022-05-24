@@ -78,6 +78,38 @@ netParams.cellParams['STN'] = {
     }
 }
 
+netParams.cellParams['Th'] = {
+    "conds": {},
+    "secs": {
+        "soma": {
+            "geom": {
+                "nseg": 1,
+                "diam": 96,
+                "L": 96,
+                #"Ra": 200.0,
+                "cm": 1
+            },
+            "mechs": {
+                'tcfastNa': {},
+                'tcslowK': {},
+                'tcCaT': {},
+                'tcCaConc': {},
+                'tcfastK': {},
+                'tch': {},
+                'tcpas2': {}
+            },
+            'ions': {
+                'na': {
+                    'e': 45
+                },
+                'k': {
+                    'e': -95
+                }
+            }
+        }
+    }
+}
+
 #%% Create populations
 
 pop_Size=10
@@ -136,6 +168,42 @@ netParams.popParams['STN_pop'] = {
     ]
 }
 
+netParams.popParams['VLA_pop'] = {
+    "cellModel": "",
+    "cellType": 'Th',
+    "numCells": pop_Size,
+    "yRange": [
+        250,
+        500
+    ],
+    "xRange": [
+        750,
+        825
+    ],
+    "zRange": [
+        0,
+        100
+    ]
+}
+
+netParams.popParams['VLP_pop'] = {
+    "cellModel": "",
+    "cellType": 'Th',
+    "numCells": pop_Size,
+    "yRange": [
+        250,
+        500
+    ],
+    "xRange": [
+        825,
+        1000
+    ],
+    "zRange": [
+        0,
+        100
+    ]
+}
+
 #%% Add stimulus
 #check out amplitude again!! #currently from fleming
 netParams.stimSourceParams['bias_gpe'] = {'type': 'IClamp', 'del': 0, 'dur': 1e12, 'amp':-0.009}
@@ -151,7 +219,7 @@ netParams.stimTargetParams['bias_stn->stn'] = {'source': 'bias_stn','sec':'soma'
 netParams.synMechParams['AMPA'] = {'mod': 'AMPA_S'}  # excitatory synaptic mechanism
 netParams.synMechParams['GABA'] = {'mod': 'GABAa_S'}  # inhibitory synaptic mechanism
 
-#%% Connections - change connectivity rules, now 1 to 1!!!!
+#%% Connections - change connectivity rules, now 1 to 1!!!! from fleming
 netParams.connParams['STN->GPe'] = {
     'preConds': {'pop': 'STN_pop'}, 
     'postConds': {'pop': 'GPe_pop'},
@@ -203,21 +271,32 @@ netParams.connParams['GPe->GPe'] = {
     'synMech': 'GABA',
     'delay': 4}
 
+netParams.connParams['GPi->VLA'] = {
+    'preConds': {'pop': 'GPi_pop'}, 
+    'postConds': {'pop': 'VLA_pop'},
+    'weight': 3,
+    'sec': 'soma',
+    'loc': 0.5,
+    'convergence': 1,
+    'synMech': 'GABA',
+    'delay': 2}
+
 #%% cfg  
 cfg = specs.SimConfig()					            # object of class SimConfig to store simulation configuration
 cfg.duration = 1*1e3 						            # Duration of the simulation, in ms
 cfg.dt = 0.01								                # Internal integration timestep to use
 cfg.verbose = 0						                # Show detailed messages 
 cfg.recordTraces = {'V_soma':{'sec':'soma','loc':0.5,'var':'v'}}  # Dict with traces to record
+cfg.recordTraces['dend_K'] =  { "sec": "soma", "loc": 0.0, "var": "ena"}
 cfg.recordStep = 0.01 			
 cfg.filename = 'model_output'  			# Set file output name
 cfg.saveJson = False
-cfg.analysis['plotTraces'] = {'include': [0,pop_Size,2*pop_Size]} # Plot recorded traces for this list of cells
+cfg.analysis['plotTraces'] = {'include': [0,pop_Size,2*pop_Size,3*pop_Size,4*pop_Size]} # Plot recorded traces for this list of cells
 cfg.hParams['celsius'] = 36
 cfg.hParams['v_init'] = -68
 
 #%% run
 sim.createSimulateAnalyze(netParams = netParams, simConfig = cfg)
-sim.analysis.plot2Dnet(include = ['GPe_pop','STN_pop', 'GPi_pop']);
-sim.analysis.plotSpikeStats(include = ['GPe_pop','STN_pop', 'GPi_pop'], saveFig=False);
+sim.analysis.plot2Dnet(include = ['GPe_pop','STN_pop','GPi_pop','VLA_pop','VLP_pop']);
+sim.analysis.plotSpikeStats(include = ['GPe_pop','STN_pop','GPi_pop','VLA_pop','VLP_pop'], saveFig=False);
 #sim.analysis.plotRateSpectrogram(include=['GPi_pop']);
