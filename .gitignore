@@ -26,3 +26,13 @@ tc_pas2.c
 tc_pas2.o
 tc_slowK.c
 tc_slowK.o
+mc_Cad.o
+mc_Cad.c
+mc_hh2.o
+mc_hh2.c
+mc_IM.o
+mc_IM.c
+mc_IT.o
+mc_IT.c
+izhi2007b.o
+izhi2007b.c
