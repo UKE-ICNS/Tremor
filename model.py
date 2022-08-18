@@ -220,10 +220,10 @@ netParams.cellParams['Str'] = {
                     'vr':-60,
                     'vt':-40,
                     'vpeak':35,
-                    'a':0.03,
+                    'a':0.06, #0.03, #pd 0.06
                     'b':-2,
                     'c':-50,
-                    'd':100,
+                    'd':50,#100, #pd 50
                     'celltype':1
                 }
             }
@@ -262,7 +262,7 @@ netParams.cellParams['Cer_nuc'] = {
     }
 }
 
-#dummy izhi - size like santaniello
+#like santaniello
 netParams.cellParams['Cer_ctx'] = {
     "conds": {},
     "secs": {
@@ -274,19 +274,48 @@ netParams.cellParams['Cer_ctx'] = {
                 #"Ra": 200.0,
                 "cm": 1
             },
-            "pointps": {
-                "Izhi": { #???
-                    'mod': 'Izhi2007b',
-                    'C':1,
-                    'k':0.7,
-                    'vr':-60,
-                    'vt':-40,
-                    'vpeak':35,
-                    'a':0.03,
-                    'b':-2,
-                    'c':-50,
-                    'd':100,
-                    'celltype':1
+            "mechs": {
+                'pcNarsg': {
+                    'gbar': 0.016
+                },
+                'pcKv1': {
+                    'gbar': 0.011
+                },
+                'pcKv4': {
+                    'gbar': 0.0039
+                },
+                'pcKbin': {
+                    'gbar': 0.0016
+                },
+                'pcCaBK': {
+                    'gkbar': 0.014
+                },
+                'pcCaint': {},
+                'pcCaP': {
+                    'pcabar': 0.00006
+                },
+                'pcIhcn': {
+                    "ghbar": 0.0002,
+                    "eh": -30
+                },
+                'pcleak': {
+                    "gbar": 9e-5,
+                    "e": -61
+                },
+                'pcNa': {
+                    'gbar': 0.014
+                }
+            },
+            'threshold': 3,
+            'ions': {
+                'na': {
+                    'e': 60
+                },
+                'k': {
+                    'e': -88
+                },
+                'ca': {
+                    'cao': 2
                 }
             }
         }
@@ -485,12 +514,14 @@ netParams.popParams['Cerc_pop'] = {
 
 #%% Add stimulus
 #check out amplitude again!! #currently from fleming biases, for tc,ctx,cern,cerc? biases from santaniello
-netParams.stimSourceParams['bias_gpe'] = {'type': 'IClamp', 'del': 0, 'dur': 1e12, 'amp':-0.009}
-netParams.stimSourceParams['bias_gpi'] = {'type': 'IClamp', 'del': 0, 'dur': 1e12, 'amp': 0.006}
-netParams.stimSourceParams['bias_stn'] = {'type': 'IClamp', 'del': 0, 'dur': 1e12, 'amp': -0.125}
-netParams.stimSourceParams['bias_pyr'] = {'type': 'IClamp', 'del': 0, 'dur': 1e10, 'amp': 0.17} #0.245
-netParams.stimSourceParams['bias_fsi'] = {'type': 'IClamp', 'del': 0, 'dur': 1e10, 'amp': 0.15} #0.070
-netParams.stimSourceParams['bias_cern'] = {'type': 'IClamp', 'del': 0, 'dur': 1e10, 'amp': -5.3e-2} #(spontaneous 50 hz?)
+netParams.stimSourceParams['bias_gpe'] = {'type': 'IClamp', 'del': 0, 'dur': 1e12, 'amp': 0.05}
+netParams.stimSourceParams['bias_gpi'] = {'type': 'IClamp', 'del': 0, 'dur': 1e12, 'amp': 0.3}
+netParams.stimSourceParams['bias_stn'] = {'type': 'IClamp', 'del': 0, 'dur': 1e12, 'amp': 0.73} 
+netParams.stimSourceParams['bias_pyr'] = {'type': 'IClamp', 'del': 0, 'dur': 1e10, 'amp': 0.17} #5Hz
+netParams.stimSourceParams['bias_fsi'] = {'type': 'IClamp', 'del': 0, 'dur': 1e10, 'amp': 0.15} #17Hz
+netParams.stimSourceParams['bias_cern'] = {'type': 'IClamp', 'del': 0, 'dur': 1e10, 'amp': 0.5} #26Hz
+netParams.stimSourceParams['bias_cerc'] = {'type': 'IClamp', 'del': 0, 'dur': 1e10, 'amp': 0.001} #40-50 Hz
+netParams.stimSourceParams['bias_str'] = {'type': 'IClamp', 'del': 0, 'dur': 1e10, 'amp': 0.05}
 #%% Add target
 netParams.stimTargetParams['bias_gpe->gpe'] = {'source': 'bias_gpe','sec':'soma', 'loc': 0.5, 'conds': {'pop':'GPe_pop'}}
 netParams.stimTargetParams['bias_gpi->gpi'] = {'source': 'bias_gpi','sec':'soma', 'loc': 0.5, 'conds': {'pop':'GPi_pop'}}
@@ -498,6 +529,8 @@ netParams.stimTargetParams['bias_stn->stn'] = {'source': 'bias_stn','sec':'soma'
 netParams.stimTargetParams['bias_pyr->pyr'] = {'source': 'bias_pyr','sec':'soma', 'loc': 0.5, 'conds': {'pop':'PYR_pop'}}
 netParams.stimTargetParams['bias_fsi->fsi'] = {'source': 'bias_fsi','sec':'soma', 'loc': 0.5, 'conds': {'pop':'FSI_pop'}}
 netParams.stimTargetParams['bias_cern->cern'] = {'source': 'bias_cern','sec':'soma', 'loc': 0.5, 'conds': {'pop':'Cern_pop'}}
+netParams.stimTargetParams['bias_cerc->cerc'] = {'source': 'bias_cerc','sec':'soma', 'loc': 0.5, 'conds': {'pop':'Cerc_pop'}}
+netParams.stimTargetParams['bias_str->str'] = {'source': 'bias_str','sec':'soma', 'loc': 0.5, 'conds': {'pop':'Str_pop'}}
 #%% Synaptic mechanism parameters - taken from fleming
 netParams.synMechParams['AMPA'] = {'mod': 'AMPA_S'}  # excitatory synaptic mechanism
 netParams.synMechParams['GABA'] = {'mod': 'GABAa_S'}  # inhibitory synaptic mechanism
@@ -547,7 +580,7 @@ netParams.connParams['GPe->STN'] = {
 netParams.connParams['GPe->GPe'] = {
     'preConds': {'pop': 'GPe_pop'}, 
     'postConds': {'pop': 'GPe_pop'},
-    'weight': 0.015, #0.005
+    'weight': 0.11,#0.015, #pd 0.11
     'sec': 'soma',
     'loc': 0.5,
     'convergence': 1,
@@ -678,7 +711,7 @@ netParams.connParams['PYR->STN'] = {
 netParams.connParams['PYR->Str'] = {
     'preConds': {'pop': 'PYR_pop'}, 
     'postConds': {'pop': 'Str_pop'},
-    'weight': 0.12, #like to STN
+    'weight': 0.003,#0.01, #pd 0.003 #and as from str weight
     'sec': 'soma',
     'loc': 0.5,
     'convergence': 5, #like to STN
@@ -695,11 +728,11 @@ netParams.connParams['Str->GPe'] = {
     'synMech': 'GABA',
     'delay': 1} #fleming
 
-#taken from cern-vlp
+#taken from cern-vlp and as from str weight
 netParams.connParams['Cern->Str'] = {
     'preConds': {'pop': 'Cern_pop'}, 
     'postConds': {'pop': 'Str_pop'},
-    'weight': 0.5, 
+    'weight': 0.01, 
     'sec': 'soma',
     'loc': 0.5,
     'divergence': 1,
@@ -719,27 +752,28 @@ netParams.connParams['Cern->VLP'] = {
 netParams.connParams['Cerc->Cern'] = {
     'preConds': {'pop': 'Cerc_pop'}, 
     'postConds': {'pop': 'Cern_pop'},
-    'weight': 0.3, #santaniello scaled to fleming
+    'weight': 0.0017, #santaniello scaled to fleming
     'sec': 'soma',
     'loc': 0.5,
     'convergence': 40,
     'synMech': 'GABA', #from santaniello scheme
     'delay': 8.4} #santaniello scaled 2 times more
 
+#santaniello no scaling
 netParams.connParams['PYR->Cerc'] = {
     'preConds': {'pop': 'PYR_pop'}, 
     'postConds': {'pop': 'Cerc_pop'},
-    'weight': 1276, #santaniello scaled to fleming (3.828)
+    'weight': 3.49,#santaniello no scale
     'sec': 'soma',
     'loc': 0.5,
     'divergence': 2.5, #cause there are gtl in between
     'synMech': 'AMPA',
-    'delay': 8} #santaniello scaled 2 times more
+    'delay': 4} #santaniello no scale
 
 netParams.connParams['PYR->Cern'] = {
     'preConds': {'pop': 'PYR_pop'}, 
     'postConds': {'pop': 'Cern_pop'},
-    'weight': 0.11, #santaniello scaled to fleming 
+    'weight': 0.01, #as pyr-str
     'sec': 'soma',
     'loc': 0.5,
     'convergence': 20, 
@@ -770,7 +804,7 @@ netParams.connParams['Str->Str'] = {
 #What to do with striato-striatal connections?, now like for gpe
 #%% cfg  
 cfg = specs.SimConfig()					            # object of class SimConfig to store simulation configuration
-cfg.duration = 1*1e3 						            # Duration of the simulation, in ms
+cfg.duration = 10*1e3 						            # Duration of the simulation, in ms
 cfg.dt = 0.01								                # Internal integration timestep to use
 cfg.verbose = 0						                # Show detailed messages 
 cfg.recordTraces = {'V_soma':{'sec':'soma','loc':0.5,'var':'v'}}  # Dict with traces to record
@@ -778,6 +812,7 @@ cfg.recordTraces = {'V_soma':{'sec':'soma','loc':0.5,'var':'v'}}  # Dict with tr
 cfg.recordStep = 0.01 			
 cfg.filename = 'model_output'  			# Set file output name
 cfg.saveJson = False
+cfg.analysis['plotRaster'] =  {'saveFig': False}
 cfg.analysis['plotTraces'] = {'include': [0,pop_Size,2*pop_Size,3*pop_Size,4*pop_Size,5*pop_Size,250,270,280,290]} # Plot recorded traces for this list of cells
 cfg.hParams['celsius'] = 36
 cfg.hParams['v_init'] = -68
@@ -787,4 +822,9 @@ sim.createSimulateAnalyze(netParams = netParams, simConfig = cfg)
 sim.analysis.plotConn(includePre = ['GPe_pop','STN_pop','GPi_pop','VLA_pop','VLP_pop','PYR_pop','FSI_pop','Str_pop','Cern_pop','Cerc_pop'], includePost = ['GPe_pop','STN_pop','GPi_pop','VLA_pop','VLP_pop','PYR_pop','FSI_pop','Str_pop','Cern_pop','Cerc_pop'],feature='numConns', graphType='bar')
 #sim.analysis.plot2Dnet(include = ['GPe_pop','STN_pop','GPi_pop','VLA_pop','VLP_pop','PYR_pop','FSI_pop','Str_pop','Cern_pop','Cerc_pop']);
 sim.analysis.plotSpikeStats(include = ['GPe_pop','STN_pop','GPi_pop','VLA_pop','VLP_pop','PYR_pop','FSI_pop','Str_pop','Cern_pop','Cerc_pop'], saveFig=False);
-#sim.analysis.plotRateSpectrogram(include=['GPi_pop']);
+sim.analysis.plotRateSpectrogram(include=['Cern_pop'], maxFreq=20);
+sim.analysis.plotRateSpectrogram(include=['STN_pop']);
+sim.analysis.plotRateSpectrogram(include=['GPi_pop']);
+sim.analysis.plotRateSpectrogram(include=['Cerc_pop']);
+sim.analysis.plotRateSpectrogram(include=['VLP_pop'], maxFreq=20);
+sim.analysis.plotRateSpectrogram(include=['VLA_pop']);
