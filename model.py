@@ -804,7 +804,7 @@ netParams.connParams['Str->Str'] = {
 #What to do with striato-striatal connections?, now like for gpe
 #%% cfg  
 cfg = specs.SimConfig()					            # object of class SimConfig to store simulation configuration
-cfg.duration = 10*1e3 						            # Duration of the simulation, in ms
+cfg.duration = 1e3 						            # Duration of the simulation, in ms
 cfg.dt = 0.01								                # Internal integration timestep to use
 cfg.verbose = 0						                # Show detailed messages 
 cfg.recordTraces = {'V_soma':{'sec':'soma','loc':0.5,'var':'v'}}  # Dict with traces to record
@@ -823,8 +823,11 @@ sim.analysis.plotConn(includePre = ['GPe_pop','STN_pop','GPi_pop','VLA_pop','VLP
 #sim.analysis.plot2Dnet(include = ['GPe_pop','STN_pop','GPi_pop','VLA_pop','VLP_pop','PYR_pop','FSI_pop','Str_pop','Cern_pop','Cerc_pop']);
 sim.analysis.plotSpikeStats(include = ['GPe_pop','STN_pop','GPi_pop','VLA_pop','VLP_pop','PYR_pop','FSI_pop','Str_pop','Cern_pop','Cerc_pop'], saveFig=False);
 sim.analysis.plotRateSpectrogram(include=['Cern_pop'], maxFreq=20);
+sim.analysis.plotRateSpectrogram(include=['Cern_pop']);
 sim.analysis.plotRateSpectrogram(include=['STN_pop']);
 sim.analysis.plotRateSpectrogram(include=['GPi_pop']);
+sim.analysis.plotRateSpectrogram(include=['GPe_pop']);
 sim.analysis.plotRateSpectrogram(include=['Cerc_pop']);
 sim.analysis.plotRateSpectrogram(include=['VLP_pop'], maxFreq=20);
+sim.analysis.plotRateSpectrogram(include=['VLP_pop']);
 sim.analysis.plotRateSpectrogram(include=['VLA_pop']);
