@@ -2,6 +2,7 @@
 import matplotlib
 from netpyne import specs, sim 
 from neuron import h
+import numpy as np
 import os
 
 %matplotlib auto
@@ -220,10 +221,10 @@ netParams.cellParams['Str'] = {
                     'vr':-60,
                     'vt':-40,
                     'vpeak':35,
-                    'a':0.06, #0.03, #pd 0.06
+                    'a':0.03, 
                     'b':-2,
                     'c':-50,
-                    'd':50,#100, #pd 50
+                    'd':100,
                     'celltype':1
                 }
             }
@@ -516,7 +517,7 @@ netParams.popParams['Cerc_pop'] = {
 #check out amplitude again!! #currently from fleming biases, for tc,ctx,cern,cerc? biases from santaniello
 netParams.stimSourceParams['bias_gpe'] = {'type': 'IClamp', 'del': 0, 'dur': 1e12, 'amp': 0.05}
 netParams.stimSourceParams['bias_gpi'] = {'type': 'IClamp', 'del': 0, 'dur': 1e12, 'amp': 0.3}
-netParams.stimSourceParams['bias_stn'] = {'type': 'IClamp', 'del': 0, 'dur': 1e12, 'amp': 0.73} 
+netParams.stimSourceParams['bias_stn'] = {'type': 'IClamp', 'del': 0, 'dur': 1e12, 'amp': 0.648} 
 netParams.stimSourceParams['bias_pyr'] = {'type': 'IClamp', 'del': 0, 'dur': 1e10, 'amp': 0.17} #5Hz
 netParams.stimSourceParams['bias_fsi'] = {'type': 'IClamp', 'del': 0, 'dur': 1e10, 'amp': 0.15} #17Hz
 netParams.stimSourceParams['bias_cern'] = {'type': 'IClamp', 'del': 0, 'dur': 1e10, 'amp': 0.5} #26Hz
@@ -536,10 +537,19 @@ netParams.synMechParams['AMPA'] = {'mod': 'AMPA_S'}  # excitatory synaptic mecha
 netParams.synMechParams['GABA'] = {'mod': 'GABAa_S'}  # inhibitory synaptic mechanism
 
 #%% Connections - change connectivity rules, now 1 to 1!!!! from fleming
+DA = 0.1
+
+cd2 = 0.1
+Ad1 = 10
+Ad2 = 7.5
+lam = 7.5
+cD1 = Ad1/(1+np.exp(-lam*(DA-1)))
+cD2 = Ad2/(1+np.exp(lam*(DA))) 
+
 netParams.connParams['STN->GPe'] = {
     'preConds': {'pop': 'STN_pop'}, 
     'postConds': {'pop': 'GPe_pop'},
-    'weight': 0.111111,
+    'weight': 0.111111*(1-cd2*DA),
     'convergence': 1, 
     'sec': 'soma',
     'loc': 0.5,
@@ -569,7 +579,7 @@ netParams.connParams['GPe->GPi'] = {
 netParams.connParams['GPe->STN'] = {
     'preConds': {'pop': 'GPe_pop'}, 
     'postConds': {'pop': 'STN_pop'},
-    'weight': 0.111111,
+    'weight': 0.111111*(1-cd2*DA),
     'convergence': 2,
     'sec': 'soma',
     'loc': 0.5,
@@ -580,7 +590,7 @@ netParams.connParams['GPe->STN'] = {
 netParams.connParams['GPe->GPe'] = {
     'preConds': {'pop': 'GPe_pop'}, 
     'postConds': {'pop': 'GPe_pop'},
-    'weight': 0.11,#0.015, #pd 0.11
+    'weight': 0.016/DA,#0.015, #pd 0.11 #cool 0.16 ;1, 0.012?
     'sec': 'soma',
     'loc': 0.5,
     'convergence': 1,
@@ -711,7 +721,7 @@ netParams.connParams['PYR->STN'] = {
 netParams.connParams['PYR->Str'] = {
     'preConds': {'pop': 'PYR_pop'}, 
     'postConds': {'pop': 'Str_pop'},
-    'weight': 0.003,#0.01, #pd 0.003 #and as from str weight
+    'weight': 0.01*cD1,#0.01, #pd 0.003 #and as from str weight 1.42*0.003
     'sec': 'soma',
     'loc': 0.5,
     'convergence': 5, #like to STN
@@ -721,7 +731,7 @@ netParams.connParams['PYR->Str'] = {
 netParams.connParams['Str->GPe'] = {
     'preConds': {'pop': 'Str_pop'}, 
     'postConds': {'pop': 'GPe_pop'},
-    'weight': 0.01, #fleming
+    'weight': 0.01*cD2/Ad2, #fleming 
     'sec': 'soma',
     'loc': 0.5,
     'convergence': 1, #fleming
@@ -784,7 +794,7 @@ netParams.connParams['PYR->Cern'] = {
 netParams.connParams['STN->Cerc'] = {
     'preConds': {'pop': 'STN_pop'}, 
     'postConds': {'pop': 'Cerc_pop'},
-    'weight': 0.5,
+    'weight': 0.01,
     'sec': 'soma',
     'loc': 0.5,
     'divergence': 1,
@@ -795,7 +805,7 @@ netParams.connParams['STN->Cerc'] = {
 netParams.connParams['Str->Str'] = {
     'preConds': {'pop': 'Str_pop'}, 
     'postConds': {'pop': 'Str_pop'},
-    'weight': 0.015, 
+    'weight': 0.016, 
     'sec': 'soma',
     'loc': 0.5,
     'convergence': 1,
@@ -827,7 +837,9 @@ sim.analysis.plotRateSpectrogram(include=['Cern_pop']);
 sim.analysis.plotRateSpectrogram(include=['STN_pop']);
 sim.analysis.plotRateSpectrogram(include=['GPi_pop']);
 sim.analysis.plotRateSpectrogram(include=['GPe_pop']);
+sim.analysis.plotRateSpectrogram(include=['Cerc_pop'], maxFreq=20);
 sim.analysis.plotRateSpectrogram(include=['Cerc_pop']);
 sim.analysis.plotRateSpectrogram(include=['VLP_pop'], maxFreq=20);
 sim.analysis.plotRateSpectrogram(include=['VLP_pop']);
+sim.analysis.plotRateSpectrogram(include=['VLA_pop'], maxFreq=20);
 sim.analysis.plotRateSpectrogram(include=['VLA_pop']);
