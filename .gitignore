@@ -2,6 +2,7 @@ __pycache__/
 tr/
 healthy/
 pd/
+Data/
 Destexhe_Static_AMPA_Synapse.c
 Destexhe_Static_AMPA_Synapse.o
 Destexhe_Static_GABAA_Synapse.c
