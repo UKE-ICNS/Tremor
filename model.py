@@ -896,7 +896,7 @@ netParams.connParams['Str->Str'] = {
     'delay': 4}
 #What to do with striato-striatal connections?, now like for gpe
 #%% cfg  
-state="tr"
+state="tr_try"
 cfg = specs.SimConfig()					            # object of class SimConfig to store simulation configuration
 cfg.duration = 1e3 						            # Duration of the simulation, in ms
 cfg.dt = 0.01								                # Internal integration timestep to use
@@ -939,10 +939,33 @@ sim.analysis.plotRateSpectrogram(include=['PYR_pop'],saveFig=f'{state}/pyr.svg')
 sim.analysis.plotRateSpectrogram(include=['FSI_pop'],saveFig=f'{state}/fsi.svg');
 sim.analysis.plotRateSpectrogram(include=['PYR_pop'], maxFreq=20,saveFig=f'{state}/pyr_enl.svg');
 sim.analysis.plotRateSpectrogram(include=['FSI_pop'], maxFreq=20,saveFig=f'{state}/fsi_enl.svg');
+#c,d=sim.analysis.plotRatePSD(include=[30,31,32,33,34,35,36,37,38,39],popColors=['b'],maxFreq=40,saveFig=f'{state}/vla_psd.svg');
 c,d=sim.analysis.plotRatePSD(include=['VLA_pop'],popColors=['b'],maxFreq=40,saveFig=f'{state}/vla_psd.svg');
-e,f=sim.analysis.plotRatePSD(include=['VLP_pop'],popColors=['b'],maxFreq=40,saveFig=f'{state}/vlp_psd.svg');
+#e,ff=sim.analysis.plotRatePSD(include=[40,41,42,43,44,45,46,47,48,49],popColors=['b'],maxFreq=40,saveFig=f'{state}/vlp_psd.svg');
+e,ff=sim.analysis.plotRatePSD(include=['VLP_pop'],popColors=['b'],maxFreq=40,saveFig=f'{state}/vlp_psd.svg');
+#a,b=sim.analysis.plotRatePSD(include=[280,281,282,283,284,285,286,287,288,289],popColors=['b'],maxFreq=40,saveFig=f'{state}/cern_psd.svg');
 a,b=sim.analysis.plotRatePSD(include=['Cern_pop'],popColors=['b'],maxFreq=40,saveFig=f'{state}/cern_psd.svg');
+#g,h=sim.analysis.plotRatePSD(include=[10,11,12,13,14,15,16,17,18,19],popColors=['b'],maxFreq=40,saveFig=f'{state}/gpi_psd.svg');
 g,h=sim.analysis.plotRatePSD(include=['GPi_pop'],popColors=['b'],maxFreq=40,saveFig=f'{state}/gpi_psd.svg');
+#i,j=sim.analysis.plotRatePSD(include=[690,691,692,693,694,695,696,697,698,699],popColors=['b'],maxFreq=40,saveFig=f'{state}/trn_psd.svg');
+i,j=sim.analysis.plotRatePSD(include=['TRN_pop'],popColors=['b'],maxFreq=40,saveFig=f'{state}/trn_psd.svg');
+
+import pickle 
+
+with open(f'{state}/trn_psd.pkl', 'wb') as f:
+    pickle.dump(j, f)
+
+with open(f'{state}/gpi_psd.pkl', 'wb') as f:
+    pickle.dump(h, f)
+
+with open(f'{state}/cern_psd.pkl', 'wb') as f:
+    pickle.dump(b, f)
+
+with open(f'{state}/vlp_psd.pkl', 'wb') as f:
+    pickle.dump(ff, f)
+
+with open(f'{state}/vla_psd.pkl', 'wb') as f:
+    pickle.dump(d, f)
 
 sim.analysis.popAvgRates()
 #%%sound
