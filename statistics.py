@@ -7,7 +7,7 @@ os.chdir(r"C:\Users\Mariia Popova\Desktop\PhD\Code\Tremor model\Tremor")
 
 #%% Tremor data
 
-state="tr_try"
+state="Data/tr"
 
 with open(f'{state}/trn_psd.pkl', 'rb') as f:
     trn = pickle.load(f)
@@ -54,7 +54,7 @@ gpi_pow24 = gpi_pow[:,23]
 
 #%% PD data
 
-state1="pd_try"
+state1="Data\pd"
 
 with open(f'{state1}/trn_psd.pkl', 'rb') as f:
     trn1 = pickle.load(f)
@@ -101,7 +101,7 @@ gpi_pow24_1 = gpi_pow1[:,23]
 
 #%% Healthy data
 
-state2="h_try"
+state2="Data/healthy"
 
 with open(f'{state2}/trn_psd.pkl', 'rb') as f:
     trn2 = pickle.load(f)
@@ -146,22 +146,71 @@ gpi_list2 = list(gpi2.items())
 gpi_pow2 = np.array(gpi_list2[0][1])
 gpi_pow24_2 = gpi_pow2[:,23]
 
+#%% Tremor-off data
+
+state="Data/troff"
+
+with open(f'{state}/trn_psd.pkl', 'rb') as f:
+    trn3 = pickle.load(f)
+
+trn_list3 = list(trn3.items())
+trn_pow_3 = np.array(trn_list3[0][1])
+trn_pow3_3 = trn_pow_3[:,2]
+trn_pow5_3 = trn_pow_3[:,4]
+trn_pow8_3 = trn_pow_3[:,7]
+
+with open(f'{state}/vla_psd.pkl', 'rb') as f:
+    vla3 = pickle.load(f)
+
+vla_list3 = list(vla3.items())
+vla_pow_3 = np.array(vla_list3[0][1])
+vla_pow3_3 = vla_pow_3[:,2]
+vla_pow5_3 = vla_pow_3[:,4]
+vla_pow8_3 = vla_pow_3[:,7]
+
+with open(f'{state}/vlp_psd.pkl', 'rb') as f:
+    vlp3 = pickle.load(f)
+
+vlp_list3 = list(vlp3.items())
+vlp_pow_3 = np.array(vlp_list3[0][1])
+vlp_pow3_3 = vlp_pow_3[:,2]
+vlp_pow5_3 = vlp_pow_3[:,4]
+vlp_pow8_3 = vlp_pow_3[:,7]
+
+with open(f'{state}/cern_psd.pkl', 'rb') as f:
+    cern3 = pickle.load(f)
+
+cern_list3 = list(cern3.items())
+cern_pow_3 = np.array(cern_list3[0][1])
+cern_pow3_3 = cern_pow_3[:,2]
+cern_pow5_3 = cern_pow_3[:,4]
+cern_pow8_3 = cern_pow_3[:,7]
+
+with open(f'{state}/gpi_psd.pkl', 'rb') as f:
+    gpi3 = pickle.load(f)
+
+gpi_list3 = list(gpi3.items())
+gpi_pow_3 = np.array(gpi_list3[0][1])
+gpi_pow24_3 = gpi_pow_3[:,23]
+
 #%% Statistics
 
 # Healthy and PD
+print("Healthy and PD")
 t_stat_gpi, p_val_gpi = stats.ttest_ind(gpi_pow24_1, gpi_pow24_2)
 print(f'GPi, 24Hz: t-statistic = {t_stat_gpi} pvalue = {p_val_gpi}')
 
 #PD and Tremor
-#VLA
-t_stat_vla_3, p_val_vla_3 = stats.ttest_ind(vla_pow3, vla_pow3_1)
-print(f'VLA, 3Hz: t-statistic = {t_stat_vla_3} pvalue = {p_val_vla_3}')
+print("PD and tremor")
+# #VLA
+# t_stat_vla_3, p_val_vla_3 = stats.ttest_ind(vla_pow3, vla_pow3_1)
+# print(f'VLA, 3Hz: t-statistic = {t_stat_vla_3} pvalue = {p_val_vla_3}')
 
-t_stat_vla_5, p_val_vla_5 = stats.ttest_ind(vla_pow5, vla_pow5_1)
-print(f'VLA, 5Hz: t-statistic = {t_stat_vla_5} pvalue = {p_val_vla_5}')
+# t_stat_vla_5, p_val_vla_5 = stats.ttest_ind(vla_pow5, vla_pow5_1)
+# print(f'VLA, 5Hz: t-statistic = {t_stat_vla_5} pvalue = {p_val_vla_5}')
 
-t_stat_vla_8, p_val_vla_8 = stats.ttest_ind(vla_pow8, vla_pow8_1)
-print(f'VLA, 8Hz: t-statistic = {t_stat_vla_8} pvalue = {p_val_vla_8}')
+# t_stat_vla_8, p_val_vla_8 = stats.ttest_ind(vla_pow8, vla_pow8_1)
+# print(f'VLA, 8Hz: t-statistic = {t_stat_vla_8} pvalue = {p_val_vla_8}')
 
 #VLP
 t_stat_vlp_3, p_val_vlp_3 = stats.ttest_ind(vlp_pow3, vlp_pow3_1)
@@ -170,25 +219,67 @@ print(f'VLP, 3Hz: t-statistic = {t_stat_vlp_3} pvalue = {p_val_vlp_3}')
 t_stat_vlp_5, p_val_vlp_5 = stats.ttest_ind(vlp_pow5, vlp_pow5_1)
 print(f'VLP, 5Hz: t-statistic = {t_stat_vlp_5} pvalue = {p_val_vlp_5}')
 
-t_stat_vlp_8, p_val_vlp_8 = stats.ttest_ind(vlp_pow8, vlp_pow8_1)
-print(f'VLP, 8Hz: t-statistic = {t_stat_vlp_8} pvalue = {p_val_vlp_8}')
+# t_stat_vlp_8, p_val_vlp_8 = stats.ttest_ind(vlp_pow8, vlp_pow8_1)
+# print(f'VLP, 8Hz: t-statistic = {t_stat_vlp_8} pvalue = {p_val_vlp_8}')
 
 #TRN
-t_stat_trn_3, p_val_trn_3 = stats.ttest_ind(trn_pow3, trn_pow3_1)
-print(f'TRN, 3Hz: t-statistic = {t_stat_trn_3} pvalue = {p_val_trn_3}')
+# t_stat_trn_3, p_val_trn_3 = stats.ttest_ind(trn_pow3, trn_pow3_1)
+# print(f'TRN, 3Hz: t-statistic = {t_stat_trn_3} pvalue = {p_val_trn_3}')
 
-t_stat_trn_5, p_val_trn_5 = stats.ttest_ind(trn_pow5, trn_pow5_1)
-print(f'TRN, 5Hz: t-statistic = {t_stat_trn_5} pvalue = {p_val_trn_5}')
+# t_stat_trn_5, p_val_trn_5 = stats.ttest_ind(trn_pow5, trn_pow5_1)
+# print(f'TRN, 5Hz: t-statistic = {t_stat_trn_5} pvalue = {p_val_trn_5}')
 
-t_stat_trn_8, p_val_trn_8 = stats.ttest_ind(trn_pow8, trn_pow8_1)
-print(f'TRN, 8Hz: t-statistic = {t_stat_trn_8} pvalue = {p_val_trn_8}')
+# t_stat_trn_8, p_val_trn_8 = stats.ttest_ind(trn_pow8, trn_pow8_1)
+# print(f'TRN, 8Hz: t-statistic = {t_stat_trn_8} pvalue = {p_val_trn_8}')
 
 #Cern
 t_stat_cern_3, p_val_cern_3 = stats.ttest_ind(cern_pow3, cern_pow3_1)
 print(f'Cern, 3Hz: t-statistic = {t_stat_cern_3} pvalue = {p_val_cern_3}')
 
-t_stat_cern_5, p_val_cern_5 = stats.ttest_ind(cern_pow5, cern_pow5_1)
-print(f'Cern, 5Hz: t-statistic = {t_stat_cern_5} pvalue = {p_val_cern_5}')
+# t_stat_cern_5, p_val_cern_5 = stats.ttest_ind(cern_pow5, cern_pow5_1)
+# print(f'Cern, 5Hz: t-statistic = {t_stat_cern_5} pvalue = {p_val_cern_5}')
 
-t_stat_cern_8, p_val_cern_8 = stats.ttest_ind(cern_pow8, cern_pow8_1)
-print(f'Cern, 8Hz: t-statistic = {t_stat_cern_8} pvalue = {p_val_cern_8}')
+# t_stat_cern_8, p_val_cern_8 = stats.ttest_ind(cern_pow8, cern_pow8_1)
+# print(f'Cern, 8Hz: t-statistic = {t_stat_cern_8} pvalue = {p_val_cern_8}')
+
+#Tremor and Tremor-off
+print("Tremor and tremor-off")
+#VLA
+# t_stat_vla_31, p_val_vla_31 = stats.ttest_ind(vla_pow3, vla_pow3_3)
+# print(f'VLA, 3Hz: t-statistic = {t_stat_vla_31} pvalue = {p_val_vla_31}')
+
+# t_stat_vla_51, p_val_vla_51 = stats.ttest_ind(vla_pow5, vla_pow5_3)
+# print(f'VLA, 5Hz: t-statistic = {t_stat_vla_51} pvalue = {p_val_vla_51}')
+
+# t_stat_vla_81, p_val_vla_81 = stats.ttest_ind(vla_pow8, vla_pow8_3)
+# print(f'VLA, 8Hz: t-statistic = {t_stat_vla_81} pvalue = {p_val_vla_81}')
+
+#VLP
+t_stat_vlp_31, p_val_vlp_31 = stats.ttest_ind(vlp_pow3, vlp_pow3_3)
+print(f'VLP, 3Hz: t-statistic = {t_stat_vlp_31} pvalue = {p_val_vlp_31}')
+
+t_stat_vlp_51, p_val_vlp_51 = stats.ttest_ind(vlp_pow5, vlp_pow5_3)
+print(f'VLP, 5Hz: t-statistic = {t_stat_vlp_51} pvalue = {p_val_vlp_51}')
+
+# t_stat_vlp_81, p_val_vlp_81 = stats.ttest_ind(vlp_pow8, vlp_pow8_3)
+# print(f'VLP, 8Hz: t-statistic = {t_stat_vlp_81} pvalue = {p_val_vlp_81}')
+
+#TRN
+# t_stat_trn_31, p_val_trn_31 = stats.ttest_ind(trn_pow3, trn_pow3_3)
+# print(f'TRN, 3Hz: t-statistic = {t_stat_trn_31} pvalue = {p_val_trn_31}')
+
+# t_stat_trn_51, p_val_trn_51 = stats.ttest_ind(trn_pow5, trn_pow5_3)
+# print(f'TRN, 5Hz: t-statistic = {t_stat_trn_51} pvalue = {p_val_trn_51}')
+
+# t_stat_trn_81, p_val_trn_81 = stats.ttest_ind(trn_pow8, trn_pow8_3)
+# print(f'TRN, 8Hz: t-statistic = {t_stat_trn_81} pvalue = {p_val_trn_81}')
+
+#Cern
+t_stat_cern_31, p_val_cern_31 = stats.ttest_ind(cern_pow3, cern_pow3_3)
+print(f'Cern, 3Hz: t-statistic = {t_stat_cern_31} pvalue = {p_val_cern_31}')
+
+# t_stat_cern_51, p_val_cern_51 = stats.ttest_ind(cern_pow5, cern_pow5_3)
+# print(f'Cern, 5Hz: t-statistic = {t_stat_cern_51} pvalue = {p_val_cern_51}')
+
+# t_stat_cern_81, p_val_cern_81 = stats.ttest_ind(cern_pow8, cern_pow8_3)
+# print(f'Cern, 8Hz: t-statistic = {t_stat_cern_81} pvalue = {p_val_cern_81}')
