@@ -327,7 +327,7 @@ netParams.cellParams['Cer_ctx'] = {
 
 pop_Size=10
 
-netParams.popParams['GPe_pop'] = {
+netParams.popParams['GPe'] = {
     "cellModel": "",
     "cellType": 'GPe',
     "numCells": pop_Size,
@@ -345,7 +345,7 @@ netParams.popParams['GPe_pop'] = {
     ]
 }
 
-netParams.popParams['GPi_pop'] = {
+netParams.popParams['GPi'] = {
     "cellModel": "",
     "cellType": 'GPe',
     "numCells": pop_Size,
@@ -363,7 +363,7 @@ netParams.popParams['GPi_pop'] = {
     ]
 }
 
-netParams.popParams['STN_pop'] = {
+netParams.popParams['STN'] = {
     "cellModel": "",
     "cellType": 'STN',
     "numCells": pop_Size,
@@ -382,7 +382,7 @@ netParams.popParams['STN_pop'] = {
 }
 
 #add some noise in th! 
-netParams.popParams['VLA_pop'] = {
+netParams.popParams['VLa'] = {
     "cellModel": "",
     "cellType": 'Th',
     "numCells": pop_Size,
@@ -401,7 +401,7 @@ netParams.popParams['VLA_pop'] = {
 }
 
 #add some noise in th! 
-netParams.popParams['VLP_pop'] = {
+netParams.popParams['VLp'] = {
     "cellModel": "",
     "cellType": 'Th',
     "numCells": pop_Size,
@@ -420,7 +420,7 @@ netParams.popParams['VLP_pop'] = {
 }
 
 #noise in ctx?
-netParams.popParams['PYR_pop'] = {
+netParams.popParams['PYR'] = {
     "cellModel": "",
     "cellType": 'PYR',
     "numCells": 20*pop_Size, #scale to santaniello
@@ -439,7 +439,7 @@ netParams.popParams['PYR_pop'] = {
 }
 
 #noise in ctx?
-netParams.popParams['FSI_pop'] = {
+netParams.popParams['FSI'] = {
     "cellModel": "",
     "cellType": 'FSI',
     "numCells": 2*pop_Size, #scale to santaniello
@@ -458,7 +458,7 @@ netParams.popParams['FSI_pop'] = {
 }
 
 #dummy
-netParams.popParams['Str_pop'] = {
+netParams.popParams['Str'] = {
     "cellModel": "",
     "cellType": 'Str',
     "numCells": pop_Size,
@@ -477,7 +477,7 @@ netParams.popParams['Str_pop'] = {
 }
 
 #dummy
-netParams.popParams['Cern_pop'] = {
+netParams.popParams['DCN'] = {
     "cellModel": "",
     "cellType": 'Cer_nuc',
     "numCells": pop_Size, #scale to santaniello
@@ -496,7 +496,7 @@ netParams.popParams['Cern_pop'] = {
 }
 
 #dummy
-netParams.popParams['Cerc_pop'] = {
+netParams.popParams['Cer. ctx.'] = {
     "cellModel": "",
     "cellType": 'Cer_ctx',
     "numCells": 40*pop_Size, #scale from santaniello
@@ -516,7 +516,7 @@ netParams.popParams['Cerc_pop'] = {
 
 #HERE
 #add some noise in th! 
-netParams.popParams['TRN_pop'] = {
+netParams.popParams['TRN'] = {
     "cellModel": "",
     "cellType": 'Th',
     "numCells": pop_Size,
@@ -545,20 +545,20 @@ netParams.stimSourceParams['bias_cern'] = {'type': 'IClamp', 'del': 0, 'dur': 1e
 netParams.stimSourceParams['bias_cerc'] = {'type': 'IClamp', 'del': 0, 'dur': 1e10, 'amp': 0.001} #40-50 Hz
 netParams.stimSourceParams['bias_str'] = {'type': 'IClamp', 'del': 0, 'dur': 1e10, 'amp': 0.05}
 #%% Add target
-netParams.stimTargetParams['bias_gpe->gpe'] = {'source': 'bias_gpe','sec':'soma', 'loc': 0.5, 'conds': {'pop':'GPe_pop'}}
-netParams.stimTargetParams['bias_gpi->gpi'] = {'source': 'bias_gpi','sec':'soma', 'loc': 0.5, 'conds': {'pop':'GPi_pop'}}
-netParams.stimTargetParams['bias_stn->stn'] = {'source': 'bias_stn','sec':'soma', 'loc': 0.5, 'conds': {'pop':'STN_pop'}}
-netParams.stimTargetParams['bias_pyr->pyr'] = {'source': 'bias_pyr','sec':'soma', 'loc': 0.5, 'conds': {'pop':'PYR_pop'}}
-netParams.stimTargetParams['bias_fsi->fsi'] = {'source': 'bias_fsi','sec':'soma', 'loc': 0.5, 'conds': {'pop':'FSI_pop'}}
-netParams.stimTargetParams['bias_cern->cern'] = {'source': 'bias_cern','sec':'soma', 'loc': 0.5, 'conds': {'pop':'Cern_pop'}}
-netParams.stimTargetParams['bias_cerc->cerc'] = {'source': 'bias_cerc','sec':'soma', 'loc': 0.5, 'conds': {'pop':'Cerc_pop'}}
-netParams.stimTargetParams['bias_str->str'] = {'source': 'bias_str','sec':'soma', 'loc': 0.5, 'conds': {'pop':'Str_pop'}}
+netParams.stimTargetParams['bias_gpe->gpe'] = {'source': 'bias_gpe','sec':'soma', 'loc': 0.5, 'conds': {'pop':'GPe'}}
+netParams.stimTargetParams['bias_gpi->gpi'] = {'source': 'bias_gpi','sec':'soma', 'loc': 0.5, 'conds': {'pop':'GPi'}}
+netParams.stimTargetParams['bias_stn->stn'] = {'source': 'bias_stn','sec':'soma', 'loc': 0.5, 'conds': {'pop':'STN'}}
+netParams.stimTargetParams['bias_pyr->pyr'] = {'source': 'bias_pyr','sec':'soma', 'loc': 0.5, 'conds': {'pop':'PYR'}}
+netParams.stimTargetParams['bias_fsi->fsi'] = {'source': 'bias_fsi','sec':'soma', 'loc': 0.5, 'conds': {'pop':'FSI'}}
+netParams.stimTargetParams['bias_cern->cern'] = {'source': 'bias_cern','sec':'soma', 'loc': 0.5, 'conds': {'pop':'DCN'}}
+netParams.stimTargetParams['bias_cerc->cerc'] = {'source': 'bias_cerc','sec':'soma', 'loc': 0.5, 'conds': {'pop':'Cer. ctx.'}}
+netParams.stimTargetParams['bias_str->str'] = {'source': 'bias_str','sec':'soma', 'loc': 0.5, 'conds': {'pop':'Str'}}
 #%% Synaptic mechanism parameters - taken from fleming
 netParams.synMechParams['AMPA'] = {'mod': 'AMPA_S'}  # excitatory synaptic mechanism
 netParams.synMechParams['GABA'] = {'mod': 'GABAa_S'}  # inhibitory synaptic mechanism
 
 #%% Connections - change connectivity rules, now 1 to 1!!!! from fleming
-DA = 0.1
+DA = 0.9
 
 cd2 = 0.1
 Ad1 = 10
@@ -568,8 +568,8 @@ cD1 = Ad1/(1+np.exp(-lam*(DA-1)))
 cD2 = Ad2/(1+np.exp(lam*(DA))) 
 
 netParams.connParams['STN->GPe'] = {
-    'preConds': {'pop': 'STN_pop'}, 
-    'postConds': {'pop': 'GPe_pop'},
+    'preConds': {'pop': 'STN'}, 
+    'postConds': {'pop': 'GPe'},
     'weight': 0.271111*(1-cd2*DA),
     'convergence': 1, 
     'sec': 'soma',
@@ -578,8 +578,8 @@ netParams.connParams['STN->GPe'] = {
     'delay': 4}
 
 netParams.connParams['STN->GPi'] = {
-    'preConds': {'pop': 'STN_pop'}, 
-    'postConds': {'pop': 'GPi_pop'},
+    'preConds': {'pop': 'STN'}, 
+    'postConds': {'pop': 'GPi'},
     'weight': 0.45,
     'sec': 'soma',
     'loc': 0.5,
@@ -588,8 +588,8 @@ netParams.connParams['STN->GPi'] = {
     'delay': 2}
 
 netParams.connParams['GPe->GPi'] = {
-    'preConds': {'pop': 'GPe_pop'}, 
-    'postConds': {'pop': 'GPi_pop'},
+    'preConds': {'pop': 'GPe'}, 
+    'postConds': {'pop': 'GPi'},
     'weight': 0.111111,
     'convergence': 1,
     'sec': 'soma',
@@ -598,8 +598,8 @@ netParams.connParams['GPe->GPi'] = {
     'delay': 2}
 
 netParams.connParams['GPe->STN'] = {
-    'preConds': {'pop': 'GPe_pop'}, 
-    'postConds': {'pop': 'STN_pop'},
+    'preConds': {'pop': 'GPe'}, 
+    'postConds': {'pop': 'STN'},
     'weight': 0.211111*(1-cd2*DA),
     'convergence': 2,
     'sec': 'soma',
@@ -609,8 +609,8 @@ netParams.connParams['GPe->STN'] = {
 
 #change weight for parkinsonian state
 netParams.connParams['GPe->GPe'] = {
-    'preConds': {'pop': 'GPe_pop'}, 
-    'postConds': {'pop': 'GPe_pop'},
+    'preConds': {'pop': 'GPe'}, 
+    'postConds': {'pop': 'GPe'},
     'weight': 0.0197/DA,#0.015, #pd 0.11 #cool 0.16 ;1, 0.012? #HERE
     'sec': 'soma',
     'loc': 0.5,
@@ -619,8 +619,8 @@ netParams.connParams['GPe->GPe'] = {
     'delay': 4}
 
 netParams.connParams['GPi->VLA'] = {
-    'preConds': {'pop': 'GPi_pop'}, 
-    'postConds': {'pop': 'VLA_pop'},
+    'preConds': {'pop': 'GPi'}, 
+    'postConds': {'pop': 'VLa'},
     'weight': 3,
     'sec': 'soma',
     'loc': 0.5,
@@ -630,8 +630,8 @@ netParams.connParams['GPi->VLA'] = {
 
 #change this!!!! for now like fleming but div from santaniello
 netParams.connParams['VLA->PYR'] = {
-    'preConds': {'pop': 'VLA_pop'}, 
-    'postConds': {'pop': 'PYR_pop'},
+    'preConds': {'pop': 'VLa'}, 
+    'postConds': {'pop': 'PYR'},
     'weight': 5, 
     'sec': 'soma',
     'loc': 0.5,
@@ -640,8 +640,8 @@ netParams.connParams['VLA->PYR'] = {
     'delay': 2}
 
 netParams.connParams['VLA->FSI'] = {
-    'preConds': {'pop': 'VLA_pop'}, 
-    'postConds': {'pop': 'FSI_pop'},
+    'preConds': {'pop': 'VLa'}, 
+    'postConds': {'pop': 'FSI'},
     'weight': 5, #same as backwards but 16 times smaller #HERE
     'sec': 'soma',
     'loc': 0.5,
@@ -650,8 +650,8 @@ netParams.connParams['VLA->FSI'] = {
     'delay': 4} #2 times bigger
 
 netParams.connParams['VLP->PYR'] = {
-    'preConds': {'pop': 'VLP_pop'}, 
-    'postConds': {'pop': 'PYR_pop'},
+    'preConds': {'pop': 'VLp'}, 
+    'postConds': {'pop': 'PYR'},
     'weight': 5,
     'sec': 'soma',
     'loc': 0.5,
@@ -660,8 +660,8 @@ netParams.connParams['VLP->PYR'] = {
     'delay': 2}
 
 netParams.connParams['VLP->FSI'] = {
-    'preConds': {'pop': 'VLP_pop'}, 
-    'postConds': {'pop': 'FSI_pop'},
+    'preConds': {'pop': 'VLp'}, 
+    'postConds': {'pop': 'FSI'},
     'weight': 5, #same as backwards but 16 times smaller #HERE
     'sec': 'soma',
     'loc': 0.5,
@@ -671,8 +671,8 @@ netParams.connParams['VLP->FSI'] = {
 
 #HERE
 netParams.connParams['VLA->TRN'] = {
-    'preConds': {'pop': 'VLA_pop'}, 
-    'postConds': {'pop': 'TRN_pop'},
+    'preConds': {'pop': 'VLa'}, 
+    'postConds': {'pop': 'TRN'},
     'weight': 0.02, 
     'sec': 'soma',
     'loc': 0.5,
@@ -681,8 +681,8 @@ netParams.connParams['VLA->TRN'] = {
     'delay': 3}
 
 netParams.connParams['VLP->TRN'] = {
-    'preConds': {'pop': 'VLP_pop'}, 
-    'postConds': {'pop': 'TRN_pop'},
+    'preConds': {'pop': 'VLp'}, 
+    'postConds': {'pop': 'TRN'},
     'weight': 0.02, 
     'sec': 'soma',
     'loc': 0.5,
@@ -691,9 +691,9 @@ netParams.connParams['VLP->TRN'] = {
     'delay': 3}
 
 netParams.connParams['TRN->VLA'] = {
-    'preConds': {'pop': 'TRN_pop'}, 
-    'postConds': {'pop': 'VLA_pop'},
-    'weight': 0.4, 
+    'preConds': {'pop': 'TRN'}, 
+    'postConds': {'pop': 'VLa'},
+    'weight': 0.02,#1, 
     'sec': 'soma',
     'loc': 0.5,
     'convergence': 1,
@@ -701,9 +701,9 @@ netParams.connParams['TRN->VLA'] = {
     'delay': 3}
 
 netParams.connParams['TRN->VLP'] = {
-    'preConds': {'pop': 'TRN_pop'}, 
-    'postConds': {'pop': 'VLP_pop'},
-    'weight': 0.4, 
+    'preConds': {'pop': 'TRN'}, 
+    'postConds': {'pop': 'VLp'},
+    'weight': 0.02,#10, 
     'sec': 'soma',
     'loc': 0.5,
     'convergence': 1,
@@ -711,9 +711,9 @@ netParams.connParams['TRN->VLP'] = {
     'delay': 3}
 
 netParams.connParams['TRN->TRN'] = {
-    'preConds': {'pop': 'TRN_pop'}, 
-    'postConds': {'pop': 'TRN_pop'},
-    'weight': 0.4, 
+    'preConds': {'pop': 'TRN'}, 
+    'postConds': {'pop': 'TRN'},
+    'weight': 0.02,#1, 
     'sec': 'soma',
     'loc': 0.5,
     'convergence': 1,
@@ -721,8 +721,8 @@ netParams.connParams['TRN->TRN'] = {
     'delay': 3}
 
 netParams.connParams['PYR->VLA'] = {
-    'preConds': {'pop': 'PYR_pop'}, 
-    'postConds': {'pop': 'VLA_pop'},
+    'preConds': {'pop': 'PYR'}, 
+    'postConds': {'pop': 'VLa'},
     'weight': 1, # same as backwards but 16 times smaller #HERE
     'sec': 'soma',
     'loc': 0.5,
@@ -731,8 +731,8 @@ netParams.connParams['PYR->VLA'] = {
     'delay': 2}
 
 netParams.connParams['PYR->VLP'] = {
-    'preConds': {'pop': 'PYR_pop'}, 
-    'postConds': {'pop': 'VLP_pop'},
+    'preConds': {'pop': 'PYR'}, 
+    'postConds': {'pop': 'VLp'},
     'weight': 0.3, # same as backwards but 16 times smaller
     'sec': 'soma',
     'loc': 0.5,
@@ -742,8 +742,8 @@ netParams.connParams['PYR->VLP'] = {
 
 #HERE
 netParams.connParams['PYR->TRN'] = {
-'preConds': {'pop': 'PYR_pop'}, 
-'postConds': {'pop': 'TRN_pop'},
+'preConds': {'pop': 'PYR'}, 
+'postConds': {'pop': 'TRN'},
 'weight': 0.03, # same as backwards but 16 times smaller
 'sec': 'soma',
 'loc': 0.5,
@@ -752,8 +752,8 @@ netParams.connParams['PYR->TRN'] = {
 'delay': 2}
 
 netParams.connParams['FSI->FSI'] = {
-    'preConds': {'pop': 'FSI_pop'}, 
-    'postConds': {'pop': 'FSI_pop'},
+    'preConds': {'pop': 'FSI'}, 
+    'postConds': {'pop': 'FSI'},
     'weight': 0.5, #same as backwards but 10 times smaller, maybe change to 11%??
     'sec': 'soma',
     'loc': 0.5,
@@ -762,8 +762,8 @@ netParams.connParams['FSI->FSI'] = {
     'delay': 0} #no delay
 
 netParams.connParams['PYR->PYR'] = {
-    'preConds': {'pop': 'PYR_pop'}, 
-    'postConds': {'pop': 'PYR_pop'},
+    'preConds': {'pop': 'PYR'}, 
+    'postConds': {'pop': 'PYR'},
     'weight': 9, #same as backwards but 1.8 times bigger, maybe change to 20%??
     'sec': 'soma',
     'loc': 0.5,
@@ -772,8 +772,8 @@ netParams.connParams['PYR->PYR'] = {
     'delay': 0} #no delay
 
 netParams.connParams['PYR->FSI'] = {
-    'preConds': {'pop': 'PYR_pop'}, 
-    'postConds': {'pop': 'FSI_pop'},
+    'preConds': {'pop': 'PYR'}, 
+    'postConds': {'pop': 'FSI'},
     'weight': 0.8, #same as backwards but 6 times smaller also scaled, maybe change to 20%??
     'sec': 'soma',
     'loc': 0.5,
@@ -782,8 +782,8 @@ netParams.connParams['PYR->FSI'] = {
     'delay': 0} #no delay
 
 netParams.connParams['FSI->PYR'] = {
-    'preConds': {'pop': 'FSI_pop'}, 
-    'postConds': {'pop': 'PYR_pop'},
+    'preConds': {'pop': 'FSI'}, 
+    'postConds': {'pop': 'PYR'},
     'weight': 7.3, #santaniello scaled to fleming, maybe change to 10%??
     'sec': 'soma',
     'loc': 0.5,
@@ -792,8 +792,8 @@ netParams.connParams['FSI->PYR'] = {
     'delay': 0} #no delay
 
 netParams.connParams['PYR->STN'] = {
-    'preConds': {'pop': 'PYR_pop'}, 
-    'postConds': {'pop': 'STN_pop'},
+    'preConds': {'pop': 'PYR'}, 
+    'postConds': {'pop': 'STN'},
     'weight': 0.12, 
     'sec': 'soma',
     'loc': 0.5,
@@ -802,8 +802,8 @@ netParams.connParams['PYR->STN'] = {
     'delay': 1}
 
 netParams.connParams['PYR->Str'] = {
-    'preConds': {'pop': 'PYR_pop'}, 
-    'postConds': {'pop': 'Str_pop'},
+    'preConds': {'pop': 'PYR'}, 
+    'postConds': {'pop': 'Str'},
     'weight': 0.01*cD1,#0.01, #pd 0.003 #and as from str weight 1.42*0.003
     'sec': 'soma',
     'loc': 0.5,
@@ -812,8 +812,8 @@ netParams.connParams['PYR->Str'] = {
     'delay': 1} #like to STN
 
 netParams.connParams['Str->GPe'] = {
-    'preConds': {'pop': 'Str_pop'}, 
-    'postConds': {'pop': 'GPe_pop'},
+    'preConds': {'pop': 'Str'}, 
+    'postConds': {'pop': 'GPe'},
     'weight': 0.01*cD2/Ad2, #fleming 
     'sec': 'soma',
     'loc': 0.5,
@@ -823,8 +823,8 @@ netParams.connParams['Str->GPe'] = {
 
 #taken from cern-vlp and as from str weight
 netParams.connParams['Cern->Str'] = {
-    'preConds': {'pop': 'Cern_pop'}, 
-    'postConds': {'pop': 'Str_pop'},
+    'preConds': {'pop': 'DCN'}, 
+    'postConds': {'pop': 'Str'},
     'weight': 0.01, 
     'sec': 'soma',
     'loc': 0.5,
@@ -833,8 +833,8 @@ netParams.connParams['Cern->Str'] = {
     'delay': 4} 
 
 netParams.connParams['Cern->VLP'] = {
-    'preConds': {'pop': 'Cern_pop'}, 
-    'postConds': {'pop': 'VLP_pop'},
+    'preConds': {'pop': 'DCN'}, 
+    'postConds': {'pop': 'VLp'},
     'weight': 0.005, #santaniello scaled yo fleming 10 times smaller #HERE
     'sec': 'soma',
     'loc': 0.5,
@@ -843,8 +843,8 @@ netParams.connParams['Cern->VLP'] = {
     'delay': 4} #santaniello 2 times more (scaled to fleming)
 
 netParams.connParams['Cerc->Cern'] = {
-    'preConds': {'pop': 'Cerc_pop'}, 
-    'postConds': {'pop': 'Cern_pop'},
+    'preConds': {'pop': 'Cer. ctx.'}, 
+    'postConds': {'pop': 'DCN'},
     'weight': 0.0017, #santaniello scaled to fleming
     'sec': 'soma',
     'loc': 0.5,
@@ -854,8 +854,8 @@ netParams.connParams['Cerc->Cern'] = {
 
 #santaniello no scaling
 netParams.connParams['PYR->Cerc'] = {
-    'preConds': {'pop': 'PYR_pop'}, 
-    'postConds': {'pop': 'Cerc_pop'},
+    'preConds': {'pop': 'PYR'}, 
+    'postConds': {'pop': 'Cer. ctx.'},
     'weight': 3.49,#santaniello no scale
     'sec': 'soma',
     'loc': 0.5,
@@ -864,8 +864,8 @@ netParams.connParams['PYR->Cerc'] = {
     'delay': 4} #santaniello no scale
 
 netParams.connParams['PYR->Cern'] = {
-    'preConds': {'pop': 'PYR_pop'}, 
-    'postConds': {'pop': 'Cern_pop'},
+    'preConds': {'pop': 'PYR'}, 
+    'postConds': {'pop': 'DCN'},
     'weight': 0.01, #as pyr-str
     'sec': 'soma',
     'loc': 0.5,
@@ -875,8 +875,8 @@ netParams.connParams['PYR->Cern'] = {
 
 #taken from cern-vlp
 netParams.connParams['STN->Cerc'] = {
-    'preConds': {'pop': 'STN_pop'}, 
-    'postConds': {'pop': 'Cerc_pop'},
+    'preConds': {'pop': 'STN'}, 
+    'postConds': {'pop': 'Cer. ctx.'},
     'weight': 0.01,
     'sec': 'soma',
     'loc': 0.5,
@@ -886,8 +886,8 @@ netParams.connParams['STN->Cerc'] = {
 
 #change weight for parkinsonian state
 netParams.connParams['Str->Str'] = {
-    'preConds': {'pop': 'Str_pop'}, 
-    'postConds': {'pop': 'Str_pop'},
+    'preConds': {'pop': 'Str'}, 
+    'postConds': {'pop': 'Str'},
     'weight': 0.016, 
     'sec': 'soma',
     'loc': 0.5,
@@ -896,7 +896,7 @@ netParams.connParams['Str->Str'] = {
     'delay': 4}
 #What to do with striato-striatal connections?, now like for gpe
 #%% cfg  
-state="tr_try"
+state="healthy1"
 cfg = specs.SimConfig()					            # object of class SimConfig to store simulation configuration
 cfg.duration = 1e3 						            # Duration of the simulation, in ms
 cfg.dt = 0.01								                # Internal integration timestep to use
@@ -906,49 +906,50 @@ cfg.recordTraces = {'V_soma':{'sec':'soma','loc':0.5,'var':'v'}}  # Dict with tr
 cfg.recordStep = 0.01 			
 cfg.filename = f'{state}/model_output'  			# Set file output name
 cfg.saveJson = True
-cfg.analysis['plotRaster'] =  {'saveFig': f'{state}/raster.svg'}
-cfg.analysis['plotTraces'] = {'include': [0,pop_Size,2*pop_Size,3*pop_Size,4*pop_Size,5*pop_Size,250,270,280,290,690]} # Plot recorded traces for this list of cells
+#cfg.analysis['plotRaster'] =  {'saveFig': f'{state}/raster.svg'}
+#cfg.analysis['plotTraces'] = {'include': [0,pop_Size,2*pop_Size,3*pop_Size,4*pop_Size,5*pop_Size,250,270,280,290,690]} # Plot recorded traces for this list of cells
 cfg.hParams['celsius'] = 36
 cfg.hParams['v_init'] = -68
 
 #%% run
 sim.createSimulateAnalyze(netParams = netParams, simConfig = cfg)
 #%% plots
-sim.analysis.plotSpikeHist(include = ['GPi_pop','VLP_pop','Cern_pop'], binSize=25, overlay=True, graphType='line',yaxis='rate',saveFig=f'{state}/spikehist.svg') # Plot recorded traces for this list of cells
-sim.analysis.plotConn(includePre = ['GPe_pop','STN_pop','GPi_pop','VLA_pop','VLP_pop','PYR_pop','FSI_pop','Str_pop','Cern_pop','Cerc_pop','TRN_pop'], includePost = ['GPe_pop','STN_pop','GPi_pop','VLA_pop','VLP_pop','PYR_pop','FSI_pop','Str_pop','Cern_pop','Cerc_pop'],feature='numConns', graphType='bar',saveFig=f'{state}/numconns.svg')
-#sim.analysis.plot2Dnet(include = ['GPe_pop','STN_pop','GPi_pop','VLA_pop','VLP_pop','PYR_pop','FSI_pop','Str_pop','Cern_pop','Cerc_pop','TRN_pop']);
-sim.analysis.plotSpikeStats(include = ['GPe_pop','STN_pop','GPi_pop','VLA_pop','VLP_pop','PYR_pop','FSI_pop','Str_pop','Cern_pop','Cerc_pop','TRN_pop'],stats=['rate'],saveFig=f'{state}/rate.svg');
-sim.analysis.plotSpikeStats(include = ['GPe_pop','STN_pop','GPi_pop','VLA_pop','VLP_pop','PYR_pop','FSI_pop','Str_pop','Cern_pop','Cerc_pop','TRN_pop'],stats=['isicv'],saveFig=f'{state}/isicv.svg');
-sim.analysis.plotRateSpectrogram(include=['Cern_pop'], maxFreq=20, saveFig=f'{state}/cern.svg');
-sim.analysis.plotRateSpectrogram(include=['Cern_pop'],saveFig=f'{state}/cern_enl.svg');
-sim.analysis.plotRateSpectrogram(include=['STN_pop'],saveFig=f'{state}/stn.svg');
-sim.analysis.plotRateSpectrogram(include=['STN_pop'], maxFreq=30,saveFig=f'{state}/stn_beta.svg');
-sim.analysis.plotRateSpectrogram(include=['GPi_pop'],saveFig=f'{state}/gpi.svg');
-sim.analysis.plotRateSpectrogram(include=['GPi_pop'], maxFreq=30,saveFig=f'{state}/gpi_beta.svg');
-sim.analysis.plotRateSpectrogram(include=['GPe_pop'],saveFig=f'{state}/gpe.svg');
-sim.analysis.plotRateSpectrogram(include=['GPe_pop'], maxFreq=30,saveFig=f'{state}/gpe_beta.svg');
-sim.analysis.plotRateSpectrogram(include=['Cerc_pop'], maxFreq=20,saveFig=f'{state}/cerc_enl.svg');
-sim.analysis.plotRateSpectrogram(include=['Cerc_pop'],saveFig=f'{state}/cerc.svg');
-sim.analysis.plotRateSpectrogram(include=['VLP_pop'], maxFreq=20,saveFig=f'{state}/vlp_enl.svg');
-sim.analysis.plotRateSpectrogram(include=['VLP_pop'],saveFig=f'{state}/vlp.svg');
-sim.analysis.plotRateSpectrogram(include=['VLA_pop'], maxFreq=20,saveFig=f'{state}/vla_enl.svg');
-sim.analysis.plotRateSpectrogram(include=['VLA_pop'],saveFig=f'{state}/vla.svg');
-sim.analysis.plotRateSpectrogram(include=['TRN_pop'],saveFig=f'{state}/trn.svg');
-sim.analysis.plotRateSpectrogram(include=['TRN_pop'], maxFreq=20,saveFig=f'{state}/trn_enl.svg');
-sim.analysis.plotRateSpectrogram(include=['PYR_pop'],saveFig=f'{state}/pyr.svg');
-sim.analysis.plotRateSpectrogram(include=['FSI_pop'],saveFig=f'{state}/fsi.svg');
-sim.analysis.plotRateSpectrogram(include=['PYR_pop'], maxFreq=20,saveFig=f'{state}/pyr_enl.svg');
-sim.analysis.plotRateSpectrogram(include=['FSI_pop'], maxFreq=20,saveFig=f'{state}/fsi_enl.svg');
+sim.analysis.plotRaster(saveFig=f'{state}/raster.svg')
+#sim.analysis.plotSpikeHist(include = ['GPi','VLp','DCN'], binSize=25, overlay=True, graphType='line',yaxis='rate',saveFig=f'{state}/spikehist.svg') # Plot recorded traces for this list of cells
+sim.analysis.plotConn(includePre = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'], includePost = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'],feature='numConns', graphType='bar',saveFig=f'{state}/numconns.svg')
+#sim.analysis.plot2Dnet(include = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN']);
+sim.analysis.plotSpikeStats(include = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'],stats=['rate'],saveFig=f'{state}/rate.svg',legendLabels=['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN']);
+sim.analysis.plotSpikeStats(include = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'],stats=['isicv'],saveFig=f'{state}/isicv.svg',legendLabels=['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN']);
+sim.analysis.plotRateSpectrogram(include=['DCN'], maxFreq=20, saveFig=f'{state}/cern.svg');
+sim.analysis.plotRateSpectrogram(include=['DCN'],saveFig=f'{state}/cern_enl.svg');
+sim.analysis.plotRateSpectrogram(include=['STN'],saveFig=f'{state}/stn.svg');
+sim.analysis.plotRateSpectrogram(include=['STN'], maxFreq=30,saveFig=f'{state}/stn_beta.svg');
+sim.analysis.plotRateSpectrogram(include=['GPi'],saveFig=f'{state}/gpi.svg');
+sim.analysis.plotRateSpectrogram(include=['GPi'], maxFreq=30,saveFig=f'{state}/gpi_beta.svg');
+sim.analysis.plotRateSpectrogram(include=['GPe'],saveFig=f'{state}/gpe.svg');
+sim.analysis.plotRateSpectrogram(include=['GPe'], maxFreq=30,saveFig=f'{state}/gpe_beta.svg');
+sim.analysis.plotRateSpectrogram(include=['Cer. ctx.'], maxFreq=20,saveFig=f'{state}/cerc_enl.svg');
+sim.analysis.plotRateSpectrogram(include=['Cer. ctx.'],saveFig=f'{state}/cerc.svg');
+sim.analysis.plotRateSpectrogram(include=['VLp'], maxFreq=20,saveFig=f'{state}/vlp_enl.svg');
+sim.analysis.plotRateSpectrogram(include=['VLp'],saveFig=f'{state}/vlp.svg');
+sim.analysis.plotRateSpectrogram(include=['VLa'], maxFreq=20,saveFig=f'{state}/vla_enl.svg');
+sim.analysis.plotRateSpectrogram(include=['VLa'],saveFig=f'{state}/vla.svg');
+sim.analysis.plotRateSpectrogram(include=['TRN'],saveFig=f'{state}/trn.svg');
+sim.analysis.plotRateSpectrogram(include=['TRN'], maxFreq=20,saveFig=f'{state}/trn_enl.svg');
+sim.analysis.plotRateSpectrogram(include=['PYR'],saveFig=f'{state}/pyr.svg');
+sim.analysis.plotRateSpectrogram(include=['FSI'],saveFig=f'{state}/fsi.svg');
+sim.analysis.plotRateSpectrogram(include=['PYR'], maxFreq=20,saveFig=f'{state}/pyr_enl.svg');
+sim.analysis.plotRateSpectrogram(include=['FSI'], maxFreq=20,saveFig=f'{state}/fsi_enl.svg');
 #c,d=sim.analysis.plotRatePSD(include=[30,31,32,33,34,35,36,37,38,39],popColors=['b'],maxFreq=40,saveFig=f'{state}/vla_psd.svg');
-c,d=sim.analysis.plotRatePSD(include=['VLA_pop'],popColors=['b'],maxFreq=40,saveFig=f'{state}/vla_psd.svg');
+c,d=sim.analysis.plotRatePSD(include=['VLa'],popColors=['b'],maxFreq=40,saveFig=f'{state}/vla_psd.svg');
 #e,ff=sim.analysis.plotRatePSD(include=[40,41,42,43,44,45,46,47,48,49],popColors=['b'],maxFreq=40,saveFig=f'{state}/vlp_psd.svg');
-e,ff=sim.analysis.plotRatePSD(include=['VLP_pop'],popColors=['b'],maxFreq=40,saveFig=f'{state}/vlp_psd.svg');
+e,ff=sim.analysis.plotRatePSD(include=['VLp'],popColors=['b'],maxFreq=40,saveFig=f'{state}/vlp_psd.svg');
 #a,b=sim.analysis.plotRatePSD(include=[280,281,282,283,284,285,286,287,288,289],popColors=['b'],maxFreq=40,saveFig=f'{state}/cern_psd.svg');
-a,b=sim.analysis.plotRatePSD(include=['Cern_pop'],popColors=['b'],maxFreq=40,saveFig=f'{state}/cern_psd.svg');
+a,b=sim.analysis.plotRatePSD(include=['DCN'],popColors=['b'],maxFreq=40,saveFig=f'{state}/cern_psd.svg');
 #g,h=sim.analysis.plotRatePSD(include=[10,11,12,13,14,15,16,17,18,19],popColors=['b'],maxFreq=40,saveFig=f'{state}/gpi_psd.svg');
-g,h=sim.analysis.plotRatePSD(include=['GPi_pop'],popColors=['b'],maxFreq=40,saveFig=f'{state}/gpi_psd.svg');
+g,h=sim.analysis.plotRatePSD(include=['GPi'],popColors=['b'],maxFreq=40,saveFig=f'{state}/gpi_psd.svg');
 #i,j=sim.analysis.plotRatePSD(include=[690,691,692,693,694,695,696,697,698,699],popColors=['b'],maxFreq=40,saveFig=f'{state}/trn_psd.svg');
-i,j=sim.analysis.plotRatePSD(include=['TRN_pop'],popColors=['b'],maxFreq=40,saveFig=f'{state}/trn_psd.svg');
+i,j=sim.analysis.plotRatePSD(include=['TRN'],popColors=['b'],maxFreq=40,saveFig=f'{state}/trn_psd.svg');
 
 import pickle 
 
