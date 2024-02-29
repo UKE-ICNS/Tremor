@@ -7,7 +7,7 @@ os.chdir(r"C:\Users\Mariia Popova\Desktop\PhD\Code\Tremor model\Tremor")
 
 #%% Tremor data
 
-state="Data/tr"
+state="Data/trtr2"
 
 with open(f'{state}/trn_psd.pkl', 'rb') as f:
     trn = pickle.load(f)
@@ -52,9 +52,18 @@ gpi_list = list(gpi.items())
 gpi_pow = np.array(gpi_list[0][1])
 gpi_pow24 = gpi_pow[:,23]
 
+with open(f'{state}/cerc_psd.pkl', 'rb') as f:
+    cerc = pickle.load(f)
+
+cerc_list = list(cerc.items())
+cerc_pow = np.array(cerc_list[0][1])
+cerc_pow3 = cerc_pow[:,2]
+cerc_pow5 = cerc_pow[:,4]
+cerc_pow8 = cerc_pow[:,7]
+
 #%% PD data
 
-state1="Data\pd"
+state1="Data\pdpd2"
 
 with open(f'{state1}/trn_psd.pkl', 'rb') as f:
     trn1 = pickle.load(f)
@@ -99,9 +108,18 @@ gpi_list1 = list(gpi1.items())
 gpi_pow1 = np.array(gpi_list1[0][1])
 gpi_pow24_1 = gpi_pow1[:,23]
 
+with open(f'{state1}/cerc_psd.pkl', 'rb') as f:
+    cerc1 = pickle.load(f)
+
+cerc_list1 = list(cerc1.items())
+cerc_pow1 = np.array(cerc_list1[0][1])
+cerc_pow3_1 = cerc_pow1[:,2]
+cerc_pow5_1 = cerc_pow1[:,4]
+cerc_pow8_1 = cerc_pow1[:,7]
+
 #%% Healthy data
 
-state2="Data/healthy"
+state2="Data/hh2"
 
 with open(f'{state2}/trn_psd.pkl', 'rb') as f:
     trn2 = pickle.load(f)
@@ -146,9 +164,18 @@ gpi_list2 = list(gpi2.items())
 gpi_pow2 = np.array(gpi_list2[0][1])
 gpi_pow24_2 = gpi_pow2[:,23]
 
+with open(f'{state2}/cerc_psd.pkl', 'rb') as f:
+    cerc2 = pickle.load(f)
+
+cerc_list2 = list(cerc2.items())
+cerc_pow2 = np.array(cerc_list2[0][1])
+cerc_pow3_2 = cerc_pow2[:,2]
+cerc_pow5_2 = cerc_pow2[:,4]
+cerc_pow8_2 = cerc_pow2[:,7]
+
 #%% Tremor-off data
 
-state="Data/troff"
+state="Data/trofftroff2"
 
 with open(f'{state}/trn_psd.pkl', 'rb') as f:
     trn3 = pickle.load(f)
@@ -193,6 +220,14 @@ gpi_list3 = list(gpi3.items())
 gpi_pow_3 = np.array(gpi_list3[0][1])
 gpi_pow24_3 = gpi_pow_3[:,23]
 
+with open(f'{state}/cerc_psd.pkl', 'rb') as f:
+    cerc3 = pickle.load(f)
+
+cerc_list3 = list(cerc3.items())
+cerc_pow_3 = np.array(cerc_list3[0][1])
+cerc_pow3_3 = cerc_pow_3[:,2]
+cerc_pow5_3 = cerc_pow_3[:,4]
+cerc_pow8_3 = cerc_pow_3[:,7]
 #%% Statistics
 
 # Healthy and PD
@@ -242,6 +277,16 @@ print(f'Cern, 3Hz: t-statistic = {t_stat_cern_3} pvalue = {p_val_cern_3}')
 # t_stat_cern_8, p_val_cern_8 = stats.ttest_ind(cern_pow8, cern_pow8_1)
 # print(f'Cern, 8Hz: t-statistic = {t_stat_cern_8} pvalue = {p_val_cern_8}')
 
+#Cerc
+t_stat_cerc_3, p_val_cerc_3 = stats.ttest_ind(cerc_pow3, cerc_pow3_1)
+print(f'Cerc, 3Hz: t-statistic = {t_stat_cerc_3} pvalue = {p_val_cerc_3}')
+
+t_stat_cerc_5, p_val_cerc_5 = stats.ttest_ind(cerc_pow5, cerc_pow5_1)
+print(f'Cerc, 5Hz: t-statistic = {t_stat_cerc_5} pvalue = {p_val_cerc_5}')
+
+# t_stat_cerc_8, p_val_cerc_8 = stats.ttest_ind(cerc_pow8, cerc_pow8_1)
+# print(f'Cerc, 8Hz: t-statistic = {t_stat_cerc_8} pvalue = {p_val_cerc_8}')
+
 #Tremor and Tremor-off
 print("Tremor and tremor-off")
 #VLA
@@ -283,3 +328,13 @@ print(f'Cern, 3Hz: t-statistic = {t_stat_cern_31} pvalue = {p_val_cern_31}')
 
 # t_stat_cern_81, p_val_cern_81 = stats.ttest_ind(cern_pow8, cern_pow8_3)
 # print(f'Cern, 8Hz: t-statistic = {t_stat_cern_81} pvalue = {p_val_cern_81}')
+
+#Cerc
+t_stat_cerc_31, p_val_cerc_31 = stats.ttest_ind(cerc_pow3, cerc_pow3_3)
+print(f'Cerc, 3Hz: t-statistic = {t_stat_cerc_31} pvalue = {p_val_cerc_31}')
+
+t_stat_cerc_51, p_val_cerc_51 = stats.ttest_ind(cerc_pow5, cerc_pow5_3)
+print(f'Cerc, 5Hz: t-statistic = {t_stat_cerc_51} pvalue = {p_val_cerc_51}')
+
+# t_stat_cerc_81, p_val_cerc_81 = stats.ttest_ind(cerc_pow8, cerc_pow8_3)
+# print(f'Cerc, 8Hz: t-statistic = {t_stat_cerc_81} pvalue = {p_val_cerc_81}')

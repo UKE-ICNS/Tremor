@@ -621,7 +621,7 @@ netParams.connParams['GPe->GPe'] = {
 netParams.connParams['GPi->VLA'] = {
     'preConds': {'pop': 'GPi'}, 
     'postConds': {'pop': 'VLa'},
-    'weight': 3,
+    'weight': 3, #6?
     'sec': 'soma',
     'loc': 0.5,
     'convergence': 1,
@@ -693,7 +693,7 @@ netParams.connParams['VLP->TRN'] = {
 netParams.connParams['TRN->VLA'] = {
     'preConds': {'pop': 'TRN'}, 
     'postConds': {'pop': 'VLa'},
-    'weight': 0.02,#1, 
+    'weight': 0.02,#1, #0.4?
     'sec': 'soma',
     'loc': 0.5,
     'convergence': 1,
@@ -703,7 +703,7 @@ netParams.connParams['TRN->VLA'] = {
 netParams.connParams['TRN->VLP'] = {
     'preConds': {'pop': 'TRN'}, 
     'postConds': {'pop': 'VLp'},
-    'weight': 0.02,#10, 
+    'weight': 0.02,#10, #0.4?
     'sec': 'soma',
     'loc': 0.5,
     'convergence': 1,
@@ -896,7 +896,7 @@ netParams.connParams['Str->Str'] = {
     'delay': 4}
 #What to do with striato-striatal connections?, now like for gpe
 #%% cfg  
-state="healthy1"
+state="check"
 cfg = specs.SimConfig()					            # object of class SimConfig to store simulation configuration
 cfg.duration = 1e3 						            # Duration of the simulation, in ms
 cfg.dt = 0.01								                # Internal integration timestep to use
@@ -914,18 +914,19 @@ cfg.hParams['v_init'] = -68
 #%% run
 sim.createSimulateAnalyze(netParams = netParams, simConfig = cfg)
 #%% plots
-sim.analysis.plotRaster(saveFig=f'{state}/raster.svg')
+sim.analysis.plotRaster(fontSize=22,saveFig=f'{state}/raster.svg')
 #sim.analysis.plotSpikeHist(include = ['GPi','VLp','DCN'], binSize=25, overlay=True, graphType='line',yaxis='rate',saveFig=f'{state}/spikehist.svg') # Plot recorded traces for this list of cells
 sim.analysis.plotConn(includePre = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'], includePost = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'],feature='numConns', graphType='bar',saveFig=f'{state}/numconns.svg')
 #sim.analysis.plot2Dnet(include = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN']);
-sim.analysis.plotSpikeStats(include = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'],stats=['rate'],saveFig=f'{state}/rate.svg',legendLabels=['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN']);
-sim.analysis.plotSpikeStats(include = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'],stats=['isicv'],saveFig=f'{state}/isicv.svg',legendLabels=['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN']);
+sim.analysis.plotSpikeStats(include = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'],stats=['rate'],saveFig=f'{state}/rate.svg',legendLabels=['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'],fontSize=22);
+sim.analysis.plotSpikeStats(include = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'],stats=['isicv'],saveFig=f'{state}/isicv.svg',legendLabels=['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'],fontSize=22);
 sim.analysis.plotRateSpectrogram(include=['DCN'], maxFreq=20, saveFig=f'{state}/cern.svg');
 sim.analysis.plotRateSpectrogram(include=['DCN'],saveFig=f'{state}/cern_enl.svg');
 sim.analysis.plotRateSpectrogram(include=['STN'],saveFig=f'{state}/stn.svg');
 sim.analysis.plotRateSpectrogram(include=['STN'], maxFreq=30,saveFig=f'{state}/stn_beta.svg');
 sim.analysis.plotRateSpectrogram(include=['GPi'],saveFig=f'{state}/gpi.svg');
-sim.analysis.plotRateSpectrogram(include=['GPi'], maxFreq=30,saveFig=f'{state}/gpi_beta.svg');
+sim.analysis.plotRateSpectrogram(include=['GPi'], maxFreq=30,saveFig=f'{state}/gpi_beta.svg',fontSize=22);
+sim.analysis.plotRateSpectrogram(include=['GPi'], maxFreq=10,saveFig=f'{state}/gpi_theta.svg');
 sim.analysis.plotRateSpectrogram(include=['GPe'],saveFig=f'{state}/gpe.svg');
 sim.analysis.plotRateSpectrogram(include=['GPe'], maxFreq=30,saveFig=f'{state}/gpe_beta.svg');
 sim.analysis.plotRateSpectrogram(include=['Cer. ctx.'], maxFreq=20,saveFig=f'{state}/cerc_enl.svg');
@@ -951,6 +952,9 @@ g,h=sim.analysis.plotRatePSD(include=['GPi'],popColors=['b'],maxFreq=40,saveFig=
 #i,j=sim.analysis.plotRatePSD(include=[690,691,692,693,694,695,696,697,698,699],popColors=['b'],maxFreq=40,saveFig=f'{state}/trn_psd.svg');
 i,j=sim.analysis.plotRatePSD(include=['TRN'],popColors=['b'],maxFreq=40,saveFig=f'{state}/trn_psd.svg');
 
+k,l=sim.analysis.plotRatePSD(include=['Cer. ctx.'],popColors=['b'],maxFreq=40,saveFig=f'{state}/cerc_psd.svg');
+#k,l=sim.analysis.plotRatePSD(include=np.arange(290,690,1).tolist(),popColors=['b'],maxFreq=40,saveFig=f'{state}/cerc_psd.svg');
+
 import pickle 
 
 with open(f'{state}/trn_psd.pkl', 'wb') as f:
@@ -967,6 +971,9 @@ with open(f'{state}/vlp_psd.pkl', 'wb') as f:
 
 with open(f'{state}/vla_psd.pkl', 'wb') as f:
     pickle.dump(d, f)
+
+with open(f'{state}/cerc_psd.pkl', 'wb') as f:
+    pickle.dump(l, f)
 
 sim.analysis.popAvgRates()
 #%%sound
