@@ -916,7 +916,7 @@ sim.createSimulateAnalyze(netParams = netParams, simConfig = cfg)
 #%% plots
 sim.analysis.plotRaster(fontSize=22,saveFig=f'{state}/raster.svg')
 #sim.analysis.plotSpikeHist(include = ['GPi','VLp','DCN'], binSize=25, overlay=True, graphType='line',yaxis='rate',saveFig=f'{state}/spikehist.svg') # Plot recorded traces for this list of cells
-sim.analysis.plotConn(includePre = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'], includePost = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'],feature='numConns', graphType='bar',saveFig=f'{state}/numconns.svg')
+sim.analysis.plotConn(includePre = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'], includePost = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'],feature='numConns', graphType='bar',saveFig=f'{state}/numconns.svg',fontSize=18)
 #sim.analysis.plot2Dnet(include = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN']);
 sim.analysis.plotSpikeStats(include = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'],stats=['rate'],saveFig=f'{state}/rate.svg',legendLabels=['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'],fontSize=22);
 sim.analysis.plotSpikeStats(include = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'],stats=['isicv'],saveFig=f'{state}/isicv.svg',legendLabels=['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'],fontSize=22);
@@ -941,6 +941,7 @@ sim.analysis.plotRateSpectrogram(include=['PYR'],saveFig=f'{state}/pyr.svg');
 sim.analysis.plotRateSpectrogram(include=['FSI'],saveFig=f'{state}/fsi.svg');
 sim.analysis.plotRateSpectrogram(include=['PYR'], maxFreq=20,saveFig=f'{state}/pyr_enl.svg');
 sim.analysis.plotRateSpectrogram(include=['FSI'], maxFreq=20,saveFig=f'{state}/fsi_enl.svg');
+sim.analysis.plotConn(includePre = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'], includePost = ['GPe','STN','GPi','VLa','VLp','PYR','FSI','Str','DCN','Cer. ctx.','TRN'],feature='numConns', graphType='matrix',clim=[0,8.3],saveFig=f'{state}/adjacency.svg',fontSize=22)
 #c,d=sim.analysis.plotRatePSD(include=[30,31,32,33,34,35,36,37,38,39],popColors=['b'],maxFreq=40,saveFig=f'{state}/vla_psd.svg');
 c,d=sim.analysis.plotRatePSD(include=['VLa'],popColors=['b'],maxFreq=40,saveFig=f'{state}/vla_psd.svg');
 #e,ff=sim.analysis.plotRatePSD(include=[40,41,42,43,44,45,46,47,48,49],popColors=['b'],maxFreq=40,saveFig=f'{state}/vlp_psd.svg');
