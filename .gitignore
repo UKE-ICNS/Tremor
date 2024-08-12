@@ -61,3 +61,6 @@ pc_Na.o
 pc_Narsg.c
 pc_Narsg.o
 graph.py
+repeats.py
+model _chforlong.py
+statistics.py
