@@ -7,7 +7,7 @@ os.chdir(r"C:\Users\Mariia Popova\Desktop\PhD\Code\Tremor model\Tremor")
 
 #%% Tremor data
 
-state="Data/trtr2"
+state="again_tr_c005"
 
 with open(f'{state}/trn_psd.pkl', 'rb') as f:
     trn = pickle.load(f)
@@ -63,7 +63,7 @@ cerc_pow8 = cerc_pow[:,7]
 
 #%% PD data
 
-state1="Data\pdpd2"
+state1="again_pd_c005"
 
 with open(f'{state1}/trn_psd.pkl', 'rb') as f:
     trn1 = pickle.load(f)
@@ -119,7 +119,7 @@ cerc_pow8_1 = cerc_pow1[:,7]
 
 #%% Healthy data
 
-state2="Data/hh2"
+state2="again_h_c005"
 
 with open(f'{state2}/trn_psd.pkl', 'rb') as f:
     trn2 = pickle.load(f)
@@ -175,7 +175,7 @@ cerc_pow8_2 = cerc_pow2[:,7]
 
 #%% Tremor-off data
 
-state="Data/trofftroff2"
+state="again_troff_c005"
 
 with open(f'{state}/trn_psd.pkl', 'rb') as f:
     trn3 = pickle.load(f)
@@ -228,12 +228,49 @@ cerc_pow_3 = np.array(cerc_list3[0][1])
 cerc_pow3_3 = cerc_pow_3[:,2]
 cerc_pow5_3 = cerc_pow_3[:,4]
 cerc_pow8_3 = cerc_pow_3[:,7]
+
+#%% Tremor and no PD data for Reviewer 1
+
+state="Data/check_tr_nopd_sep"
+
+with open(f'{state}/vlp_psd.pkl', 'rb') as f:
+    vlp4 = pickle.load(f)
+
+vlp_list4 = list(vlp4.items())
+vlp_pow_4 = np.array(vlp_list4[0][1])
+vlp_pow3_4 = vlp_pow_4[:,2]
+vlp_pow5_4 = vlp_pow_4[:,4]
+vlp_pow8_4 = vlp_pow_4[:,7]
+
+with open(f'{state}/cern_psd.pkl', 'rb') as f:
+    cern4 = pickle.load(f)
+
+cern_list4 = list(cern4.items())
+cern_pow_4 = np.array(cern_list4[0][1])
+cern_pow3_4 = cern_pow_4[:,2]
+cern_pow5_4 = cern_pow_4[:,4]
+cern_pow8_4 = cern_pow_4[:,7]
+
 #%% Statistics
 
 # Healthy and PD
 print("Healthy and PD")
 t_stat_gpi, p_val_gpi = stats.ttest_ind(gpi_pow24_1, gpi_pow24_2)
 print(f'GPi, 24Hz: t-statistic = {t_stat_gpi} pvalue = {p_val_gpi}')
+
+#PD off and Tremor, Reviwer 1
+print("PD off and tremor, Reviewer 1")
+
+#VLP
+t_stat_vlp_3_r, p_val_vlp_3_r = stats.ttest_ind(vlp_pow3_4, vlp_pow3_2)
+print(f'VLP, 3Hz: t-statistic = {t_stat_vlp_3_r} pvalue = {p_val_vlp_3_r}')
+
+t_stat_vlp_5_r, p_val_vlp_5_r = stats.ttest_ind(vlp_pow5_4, vlp_pow5_2)
+print(f'VLP, 5Hz: t-statistic = {t_stat_vlp_5_r} pvalue = {p_val_vlp_5_r}')
+
+#Cern
+t_stat_cern_3_r, p_val_cern_3_r = stats.ttest_ind(cern_pow3_4, cern_pow3_2)
+print(f'Cern, 3Hz: t-statistic = {t_stat_cern_3_r} pvalue = {p_val_cern_3_r}')
 
 #PD and Tremor
 print("PD and tremor")
